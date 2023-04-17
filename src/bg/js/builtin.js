@@ -4,12 +4,15 @@ class Builtin {
     }
 
     async loadData() {
-        this.dicts['collins'] = await Builtin.loadData('data/collins.json');
+        this.dicts['collins'] = [];
+        // this.dicts['collins'] = await Builtin.loadData('data/collins.json');
     }
 
     findTerm(dictname, term) {
-        const dict = this.dicts[dictname];
-        return dict.hasOwnProperty(term) ? JSON.stringify(dict[term]):null;
+        // since there is no avarible dictionary, build in is not useable. Just return null.
+        return null;
+        // const dict = this.dicts[dictname];
+        // return dict.hasOwnProperty(term) ? JSON.stringify(dict[term]):null;
     }
 
     static async loadData(path) {

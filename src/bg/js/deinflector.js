@@ -5,7 +5,13 @@ class Deinflector {
     }
 
     async loadData() {
-        this.wordforms = await Deinflector.loadData(this.path);
+        // try {
+        //     this.wordforms = await Deinflector.loadData(this.path);
+        // } catch (err) {
+        //     console.error(err);
+        //     this.wordforms = [];
+        // }
+        this.wordforms = [];
     }
 
     deinflect(term) {

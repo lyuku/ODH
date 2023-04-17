@@ -66,6 +66,7 @@ function populateDictionary(dicts) {
 function populateSysScriptsList(dictLibrary) {
     const optionscripts = Array.from(new Set(dictLibrary.split(',').filter(x => x).map(x => x.trim())));
     let systemscripts = [
+        'gpt_translate',
         'builtin_encn_Collins', 'general_Makenotes',//default & builtin script
         'cncn_Zdic', //cn-cn dictionary
         'encn_Collins', 'encn_Cambridge', 'encn_Cambridge_tc', 'encn_Oxford', 'encn_Youdao', 'encn_Baicizhan', //en-cn dictionaries
