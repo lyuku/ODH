@@ -24,7 +24,6 @@ class ODHBack {
         chrome.tabs.onCreated.addListener((tab) => this.onTabReady(tab.id));
         chrome.tabs.onUpdated.addListener(this.onTabReady.bind(this));
         chrome.commands.onCommand.addListener((command) => this.onCommand(command));
-
     }
 
     onCommand(command) {
@@ -123,7 +122,6 @@ class ODHBack {
     onMessage(request, sender, callback) {
         const { action, params } = request;
         const method = this['api_' + action];
-
         if (typeof(method) === 'function') {
             params.callback = callback;
             method.call(this, params);
@@ -137,6 +135,7 @@ class ODHBack {
             params
         } = e.data;
         const method = this['api_' + action];
+
         if (typeof(method) === 'function')
             method.call(this, params);
 
@@ -166,6 +165,38 @@ class ODHBack {
             success: (data, status) => this.callback(data, callbackId)
         };
         $.ajax(request);
+    }
+
+    async api_ChatGpt(data) {
+        
+        let { params, callbackId } = data;
+        const apiKey = '';
+        const modelId = 'gpt-3.5-turbo';
+
+        let req = {
+            url: 'https://api.openai.com/v1/chat/completions',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + apiKey
+            },
+            data: JSON.stringify({
+              "messages": [{"role": "system", "content": "You are a translation engine that can only translate text and cannot interpret it."},
+              {"role": "user", "content": "translate:'" + params + "'\n target language:chinese\n sentences number:2\n"}],
+              max_tokens: 300, // 最大生成文本长度
+              temperature: 0.7, // 生成文本的随机程度
+              model: modelId,
+              stop: '\n'
+            }),
+            error: (xhr, status, error) => this.callback(null, callbackId),
+            success: (data, status) => this.callback(data, callbackId)
+          };
+        $.ajax(req);
+    }
+
+    async api_Ajax(data) {
+        let { params, callbackId } = data;
+        $.ajax(params);
     }
 
     async api_Deinflect(params) {

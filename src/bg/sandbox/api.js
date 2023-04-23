@@ -22,6 +22,10 @@ class SandboxAPI {
         return await this.postMessage('Fetch', { url });
     }
 
+    async chatGpt(params) {
+        return await this.postMessage('ChatGpt', { params });
+    }
+
     async getBuiltin(dict, word) {
         return await this.postMessage('getBuiltin', { dict, word });
     }

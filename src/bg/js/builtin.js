@@ -9,7 +9,7 @@ class Builtin {
     }
 
     findTerm(dictname, term) {
-        // since there is no avarible dictionary, build in is not useable. Just return null.
+        // Since there is no avarible dictionary, build in is not useable. Just return null.
         return null;
         // const dict = this.dicts[dictname];
         // return dict.hasOwnProperty(term) ? JSON.stringify(dict[term]):null;
